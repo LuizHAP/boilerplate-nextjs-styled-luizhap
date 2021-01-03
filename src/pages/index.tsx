@@ -1,12 +1,15 @@
 import React from 'react'
 
-import { Container } from '@/styles/pages/Home'
 import { Layout } from '@/components/templates'
+import { Container } from '@/styles/pages/Login'
+import { LeftContainer } from '@/components/organisms'
 
 const Home: React.FC = () => {
   return (
     <Layout title="Login - Zappts Frontend">
-      <Container />
+      <Container>
+        <LeftContainer />
+      </Container>
     </Layout>
   )
 }
