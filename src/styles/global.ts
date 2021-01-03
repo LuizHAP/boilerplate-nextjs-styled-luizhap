@@ -22,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
       color: ${theme.colors.text};
       font: ${theme.font.sizes.small};
     }
+    .slick-slide,
+    .slick-slide * {
+      outline: none !important;
+    }
   `}
 `
 
