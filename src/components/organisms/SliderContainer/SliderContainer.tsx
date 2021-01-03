@@ -10,7 +10,7 @@ import { ImagesSlider } from '@/components/molecules'
 
 import items from './items'
 
-const LeftContainer = (): JSX.Element => {
+const SliderContainer = (): JSX.Element => {
   return (
     <Container>
       <ImagesSlider>
@@ -26,4 +26,4 @@ const LeftContainer = (): JSX.Element => {
   )
 }
 
-export default LeftContainer
+export default SliderContainer
