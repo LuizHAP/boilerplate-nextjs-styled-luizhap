@@ -8,14 +8,4 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  & .rightContainer {
-    position: absolute;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    background-size: cover;
-    background-position: 50% 50%;
-  }
 `

@@ -5,7 +5,7 @@ import {
   Title,
   Subtitle,
   Image
-} from '@/styles/components/LeftContainer'
+} from '@/styles/components/SliderContainer'
 import { ImagesSlider } from '@/components/molecules'
 
 import items from './items'
