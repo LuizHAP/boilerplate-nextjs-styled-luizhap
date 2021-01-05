@@ -3,7 +3,6 @@ import {
   Container,
   Logo,
   Title,
-  ForgotPassword,
   Wrapper,
   OrText,
   CreateAccount
@@ -19,20 +18,33 @@ import * as Yup from 'yup'
 import { FormHandles } from '@unform/core'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-const LoginContainer = (): JSX.Element => {
+import { useAuth } from 'hooks/useAuth'
+
+import { toast } from 'react-toastify'
+
+const SignUpContainer = (): JSX.Element => {
+  const auth = useAuth()
+  const router = useRouter()
   const formRef = useRef<FormHandles>(null)
   const handleSubmit = useCallback(async (data: any) => {
     try {
       formRef.current?.setErrors({})
 
       const schema = Yup.object().shape({
+        fullname: Yup.string().required('O nome é obrigatório'),
         email: Yup.string().email().required('Email é obrigatório'),
         password: Yup.string().required('Senha é obrigatória')
       })
 
       await schema.validate(data, {
         abortEarly: false
+      })
+
+      return auth.signUp(data).then(() => {
+        toast.success('Cadastro realizado com sucesso')
+        router.push('/')
       })
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -47,21 +59,23 @@ const LoginContainer = (): JSX.Element => {
     <Container>
       <Logo>Invision</Logo>
       <Wrapper>
-        <Title>Welcome to Invision</Title>
+        <Title>Getting Started</Title>
         <Form ref={formRef} onSubmit={handleSubmit}>
+          <Input name="fullname" type="text" label="Full Name" />
           <Input name="email" type="email" label="Users name or Email" />
           <Input name="password" type="password" label="Password" />
-          <ForgotPassword>Forgot password?</ForgotPassword>
-          <SignInButton type="submit">Sign in</SignInButton>
+          <SignInButton type="submit">Sign Up</SignInButton>
         </Form>
         <OrText>Or</OrText>
-        <GoogleButton>Sign in with Google</GoogleButton>
+        <GoogleButton>Sign up with Google</GoogleButton>
         <CreateAccount>
-          New <span>Invision</span>? <Link href="/signup">Create Account</Link>
+          By signing up, you agree to <span>Invision</span> <br />
+          <Link href="/terms">Terms of Conditions</Link> and{' '}
+          <Link href="/privacy">Privacy Policy</Link>
         </CreateAccount>
       </Wrapper>
     </Container>
   )
 }
 
-export default LoginContainer
+export default SignUpContainer
